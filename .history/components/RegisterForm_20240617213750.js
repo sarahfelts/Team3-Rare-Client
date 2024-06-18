@@ -8,10 +8,17 @@ import { registerUser } from '../utils/auth';
 function RegisterForm({ user, updateUser }) {
   const router = useRouter();
   const fullName = user.fbUser.displayName;
-  const nameParts = fullName.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-
+  let firstName = '';
+  let lastName = '';
+  
+  if (fullName.includes(' ')) {
+    const nameParts = fullName.split(' ');
+    firstName = nameParts[0];
+    lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+  } else {
+    firstName = fullName;
+  }
+  
   const [formData, setFormData] = useState({
     first_name: firstName,
     last_name: lastName,

@@ -18,7 +18,6 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 const registerUser = async (userInfo) => {
-  console.warn('userInfo', userInfo);
   const url = new URL('users/register_user', process.env.NEXT_PUBLIC_DATABASE_URL).href;
 
   const response = await fetch(url, {

@@ -9,6 +9,7 @@ function RegisterForm({ user, updateUser }) {
   const router = useRouter();
   const fullName = user.fbUser.displayName;
   const nameParts = fullName.split(' ');
+
   const firstName = nameParts[0];
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
 

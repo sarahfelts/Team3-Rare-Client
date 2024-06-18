@@ -9,6 +9,7 @@ function RegisterForm({ user, updateUser }) {
   const router = useRouter();
   const fullName = user.fbUser.displayName;
   const nameParts = fullName.split(' ');
+
   const firstName = nameParts[0];
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
 
@@ -18,7 +19,7 @@ function RegisterForm({ user, updateUser }) {
     email: user.fbUser.email,
     bio: '',
     uid: user.uid,
-    profile_image_url: user.fbUser.photoURL,
+    profile_image_url: '',
     created_on: new Date().toISOString().split('T')[0],
     active: true,
     is_staff: false,
@@ -90,7 +91,6 @@ RegisterForm.propTypes = {
     fbUser: PropTypes.shape({
       displayName: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
-      photoURL: PropTypes.string,
     }).isRequired,
   }).isRequired,
   updateUser: PropTypes.func.isRequired,

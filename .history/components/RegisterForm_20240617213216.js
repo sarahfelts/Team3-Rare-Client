@@ -9,6 +9,7 @@ function RegisterForm({ user, updateUser }) {
   const router = useRouter();
   const fullName = user.fbUser.displayName;
   const nameParts = fullName.split(' ');
+
   const firstName = nameParts[0];
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
 
@@ -44,9 +45,14 @@ function RegisterForm({ user, updateUser }) {
         <Form.Label>First Name</Form.Label>
         <Form.Control type="text" name="first_name" required placeholder="Enter your first name" value={formData.first_name} onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
       </Form.Group>
-      <Form.Group className="mb-3">
+      <Form.Group controlId="formLastName">
         <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" name="last_name" required placeholder="Enter your last name" value={formData.last_name} onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+        <Form.Control
+          type="text"
+          placeholder="Enter last name"
+          value={formData.last_name}
+          onChange={e => setFormData({ ...formData, last_name: e.target.value })}
+        />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Email</Form.Label>

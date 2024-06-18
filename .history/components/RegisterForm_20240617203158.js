@@ -1,27 +1,20 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { registerUser } from '../utils/auth';
 
 function RegisterForm({ user, updateUser }) {
-  const router = useRouter();
-  const fullName = user.fbUser.displayName;
-  const nameParts = fullName.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-
   const [formData, setFormData] = useState({
-    first_name: firstName,
-    last_name: lastName,
-    email: user.fbUser.email,
+    first_name: user.displayName ? user.displayName.split(' ')[0] : '',
+    last_name: user.displayName ? user.displayName.split(' ')[1] : '',
+    username: '',
+    password: '',
+    verify_password: '',
+    profile_image_url: user.photoURL || '',
+    email: user.email || '',
     bio: '',
     uid: user.uid,
-    profile_image_url: user.fbUser.photoURL,
-    created_on: new Date().toISOString().split('T')[0],
-    active: true,
-    is_staff: false,
   });
 
   const handleSubmit = (e) => {
@@ -32,10 +25,7 @@ function RegisterForm({ user, updateUser }) {
       return;
     }
 
-    registerUser(formData).then(() => {
-      updateUser(user.uid);
-      router.push('/');
-    });
+    registerUser(formData).then(() => updateUser(user.uid));
   };
 
   return (
@@ -65,16 +55,6 @@ function RegisterForm({ user, updateUser }) {
         <Form.Control type="password" name="verify_password" required placeholder="Enter your password again" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Profile Image URL</Form.Label>
-        <Form.Control 
-          type="text" 
-          name="profile_image_url"
-          placeholder="Enter your profile image URL"
-          value={formData.profile_image_url} 
-          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
         <Form.Label>Bio</Form.Label>
         <Form.Control as="textarea" name="bio" placeholder="Enter your bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
       </Form.Group>
@@ -87,11 +67,12 @@ function RegisterForm({ user, updateUser }) {
 RegisterForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
-    fbUser: PropTypes.shape({
-      displayName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      photoURL: PropTypes.string,
-    }).isRequired,
+    displayName: PropTypes.string,
+    photoURL: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    profile_image_url: PropTypes.string,
+    email: PropTypes.string,
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
 };

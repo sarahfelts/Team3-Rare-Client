@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
         {isMounted && (
           <Router>
             <Routes>
-              <Route path="/" />
+              <Route path="/event" element={<EventPage />} />
               {/* Add more routes as needed */}
             </Routes>
             <ViewDirectorBasedOnUserAuthStatus

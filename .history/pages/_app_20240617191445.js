@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/globals.css';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AuthProvider } from '../utils/context/authContext';
+import PropTypes from 'prop-types';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 import UserContext from '../utils/context/UserContext';
+import EventPage from './event';
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
@@ -28,7 +27,7 @@ function MyApp({ Component, pageProps }) {
         {isMounted && (
           <Router>
             <Routes>
-              <Route path="/" />
+              <Route path="/event" element={<EventPage />} />
               {/* Add more routes as needed */}
             </Routes>
             <ViewDirectorBasedOnUserAuthStatus
@@ -44,4 +43,9 @@ function MyApp({ Component, pageProps }) {
     </AuthProvider>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object,
+};
 export default MyApp;

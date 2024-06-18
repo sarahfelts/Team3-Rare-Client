@@ -4,7 +4,7 @@ import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
-  console.warn('User Info', user.fbUser);
+  console.warn(user.fbUser)
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"

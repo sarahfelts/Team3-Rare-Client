@@ -17,25 +17,20 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .then((resp) => resolve(resp.json()))
     .catch(reject);
 });
-const registerUser = async (userInfo) => {
-  console.warn('userInfo', userInfo);
-  const url = new URL('users/register_user', process.env.NEXT_PUBLIC_DATABASE_URL).href;
+const registerUser = (userInfo) => new Promise((resolve, reject) => {
+  const url = new URL('register', process.env.NEXT_PUBLIC_DATABASE_URL).href;
 
-  const response = await fetch(url, {
+  fetch(url, {
     method: 'POST',
+    body: JSON.stringify(userInfo),
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-    body: JSON.stringify(userInfo),
-  });
-
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(`Failed to register user: ${message}`);
-  }
-
-  return response.json();
-};
+  })
+    .then((resp) => resolve(resp.json()))
+    .catch(reject);
+});
 
 const signIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider();

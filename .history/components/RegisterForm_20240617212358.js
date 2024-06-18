@@ -7,18 +7,13 @@ import { registerUser } from '../utils/auth';
 
 function RegisterForm({ user, updateUser }) {
   const router = useRouter();
-  const fullName = user.fbUser.displayName;
-  const nameParts = fullName.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-
   const [formData, setFormData] = useState({
-    first_name: firstName,
-    last_name: lastName,
-    email: user.fbUser.email,
+    first_name: '',
+    last_name: '',
+    email:user.fbUser.email,
     bio: '',
     uid: user.uid,
-    profile_image_url: user.fbUser.photoURL,
+    profile_image_url: '',
     created_on: new Date().toISOString().split('T')[0],
     active: true,
     is_staff: false,
@@ -87,11 +82,12 @@ function RegisterForm({ user, updateUser }) {
 RegisterForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
-    fbUser: PropTypes.shape({
-      displayName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      photoURL: PropTypes.string,
-    }).isRequired,
+    displayName: PropTypes.string,
+    photoURL: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    profile_image_url: PropTypes.string,
+    email: PropTypes.string,
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
 };
