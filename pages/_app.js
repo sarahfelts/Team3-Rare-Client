@@ -1,33 +1,11 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
-<<<<<<< HEAD
-import { AuthProvider } from '../utils/context/authContext';
-import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
-
-function MyApp({ Component, pageProps }) {
-  return (
-    <AuthProvider>
-      {' '}
-      {/* gives children components access to user and auth methods */}
-      <ViewDirectorBasedOnUserAuthStatus
-        // if status is pending === loading
-        // if status is logged in === view app
-        // if status is logged out === sign in page
-        component={Component}
-        pageProps={pageProps}
-      />
-    </AuthProvider>
-  );
-}
-
-=======
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AuthProvider } from '../utils/context/authContext';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 import UserContext from '../utils/context/UserContext';
-import EventPage from './event';
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
@@ -50,7 +28,7 @@ function MyApp({ Component, pageProps }) {
         {isMounted && (
           <Router>
             <Routes>
-              <Route path="/event" element={<EventPage />} />
+              <Route path="/"/>
               {/* Add more routes as needed */}
             </Routes>
             <ViewDirectorBasedOnUserAuthStatus
@@ -66,5 +44,5 @@ function MyApp({ Component, pageProps }) {
     </AuthProvider>
   );
 }
->>>>>>> origin/main
+
 export default MyApp;

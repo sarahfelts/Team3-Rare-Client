@@ -19,7 +19,7 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
-  const url = new URL('register', process.env.NEXT_PUBLIC_DATABASE_URL).href;
+  const url = new URL('register_user', process.env.NEXT_PUBLIC_DATABASE_URL).href;
 
   fetch(url, {
     method: 'POST',
