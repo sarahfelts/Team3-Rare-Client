@@ -66,11 +66,11 @@ function RegisterForm({ user, updateUser }) {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Profile Image URL</Form.Label>
-        <Form.Control 
-          type="text" 
+        <Form.Control
+          type="text"
           name="profile_image_url"
           placeholder="Enter your profile image URL"
-          value={formData.profile_image_url} 
+          value={formData.profile_image_url}
           onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
         />
       </Form.Group>

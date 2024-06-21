@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleUser } from '../../components/api/userData';
-import UserCard from '../../components/UserCard';
+import UserCard from '../../components/cards/UserCard';
 
 export default function User() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function User() {
     if (id) {
       getSingleUser(id)
         .then((userData) => {
-            console.warn('Single User Data', userData);
+          console.warn('Single User Data', userData);
           setUser(userData);
         })
         .catch((error) => {
@@ -21,15 +21,18 @@ export default function User() {
     }
   }, [id]);
 
-    return user ? (
-      <UserCard {...user} singleUserView={true} 
-        full_name={user.full_name}
-        profile_image_url={user.profile_image_url}
-        email={user.email}
-        created_on={user.created_on}
-        user_profile_type={user.user_profile_type}
-        onUpdate={() => window.location.reload()}/>
-    ) : (
-      <div>Loading...</div>
-    );
+  return user ? (
+    <UserCard
+      {...user}
+      singleUserView
+      full_name={user.full_name}
+      profile_image_url={user.profile_image_url}
+      email={user.email}
+      created_on={user.created_on}
+      user_profile_type={user.user_profile_type}
+      onUpdate={() => window.location.reload()}
+    />
+  ) : (
+    <div>Loading...</div>
+  );
 }
