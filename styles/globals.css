@@ -25,3 +25,9 @@ img[id^="profile-image-"] {
   width: 100px;  /* Adjust as needed */
   height: 100px; /* Adjust as needed */
 }
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
