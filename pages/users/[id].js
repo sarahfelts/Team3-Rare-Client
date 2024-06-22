@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleUser } from '../../components/api/userData';
-import UserCard from '../../components/UserCard';
+import UserCard from '../../components/cards/UserCard';
 
 export default function User() {
   const router = useRouter();

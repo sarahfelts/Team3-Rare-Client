@@ -1,7 +1,5 @@
-
-import { useState } from 'react';
-import { useEffect } from 'react';
-import UserCard from '../components/UserCard';
+import { useState, useEffect } from 'react';
+import UserCard from '../components/cards/UserCard';
 import { getUsers } from '../components/api/userData';
 
 function Home() {
