@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route,Switch, BrowserRouter as Router } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AuthProvider } from '../utils/context/authContext';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 import UserContext from '../utils/context/UserContext';
+import Home from './index';
+import EditUser from './users/edit/[id]';
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
@@ -28,7 +30,8 @@ function MyApp({ Component, pageProps }) {
         {isMounted && (
           <Router>
             <Routes>
-              <Route path="/"/>
+              <Route path="/" element={<Home />} />
+              <Route path="/users/edit/:id" element={<EditUser />} />
               {/* Add more routes as needed */}
             </Routes>
             <ViewDirectorBasedOnUserAuthStatus
@@ -44,5 +47,4 @@ function MyApp({ Component, pageProps }) {
     </AuthProvider>
   );
 }
-
 export default MyApp;

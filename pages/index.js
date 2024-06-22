@@ -18,7 +18,7 @@ return (
     <h1>Users</h1>
     {users.map((user) => (
       <section key={`user--${user.id}`} className="user">
-        <UserCard
+        <UserCard {...user} allUsersView={true}
           id={user.id.toString()}
           first_name={user.first_name}
           last_name={user.last_name}
